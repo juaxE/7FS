@@ -32,7 +32,6 @@ export const logIn = (username, password) => {
 
 export const tokenLoggedIn = (user) => {
     return async dispatch => {
-        console.log('token', user.token)
         dispatch(setUser(user))
         blogService.setToken(user.token)
     }
