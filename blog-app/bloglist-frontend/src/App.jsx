@@ -5,6 +5,8 @@ import Togglable from './components/Togglable'
 import BlogForm from './components/BlogForm'
 import blogService from './services/blogs'
 import loginService from './services/login'
+import { useDispatch } from 'react-redux'
+import { setNotification } from './reducers/notificationReducer'
 
 
 
@@ -13,10 +15,9 @@ const App = () => {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [user, setUser] = useState(null)
-    const [notifMessage, setNotifMessage] = useState(null)
-    const [notifType, setNotifType] = useState(null)
 
     const blogFormRef = useRef()
+    const dispatch = useDispatch()
 
     useEffect(() => {
         blogService.getAll().then(blogs => {
@@ -50,10 +51,7 @@ const App = () => {
             setUsername('')
             setPassword('')
         } catch (exception) {
-            setNotif('wrong credentials', 'error')
-            setTimeout(() => {
-                clearNotif()
-            }, 3000)
+            dispatch(setNotification('wrong credentials', 'error', 5))
         }
     }
 
@@ -61,11 +59,7 @@ const App = () => {
 
         const returnedBlog = await blogService.create(blogObject)
         setBlogs((prevBlogs) => [...prevBlogs, returnedBlog])
-        setNotif(`A new blog ${returnedBlog.title} by ${returnedBlog.author} added`, 'success')
-        blogFormRef.current.toggleVisibility()
-        setTimeout(() => {
-            clearNotif()
-        }, 3000)
+        dispatch(setNotification(`A new blog ${returnedBlog.title} by ${returnedBlog.author} added`, 'success', 5))
     }
 
     const handleBlogDeletion = async (id) => {
@@ -82,16 +76,6 @@ const App = () => {
     const logOut = () => {
         window.localStorage.removeItem('loggedBlogAppUser')
         setUser(null)
-    }
-
-    const setNotif = (message, type) => {
-        setNotifMessage(message)
-        setNotifType(type)
-    }
-
-    const clearNotif = () => {
-        setNotifMessage(null)
-        setNotifType(null)
     }
 
     const loginForm = () => (
@@ -135,7 +119,7 @@ const App = () => {
     return (
         <div>
             <h2>Blogs</h2>
-            <Notification message={notifMessage} type={notifType} />
+            <Notification />
             {!user && loginForm()}
             {user &&
                 <div>
