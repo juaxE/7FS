@@ -8,12 +8,14 @@ import Notification from './components/Notification'
 import Togglable from './components/Togglable'
 import BlogForm from './components/BlogForm'
 import Users from './components/Users'
+import User from './components/User'
 import Menu from './components/Menu'
 import BlogList from './components/BlogList'
 import { useDispatch, useSelector } from 'react-redux'
 import { setNotification } from './reducers/notificationReducer'
 import { logIn, tokenLoggedIn, logOut } from './reducers/userReducer'
 import { initializeBlogs, createBlog } from './reducers/blogReducer'
+import { initializeUsers } from './reducers/usersReducer'
 import LoginForm from './components/LoginForm'
 
 
@@ -24,6 +26,8 @@ const App = () => {
 
     useEffect(() => {
         dispatch(initializeBlogs())
+        dispatch(initializeUsers())
+
     }, [])
 
     useEffect(() => {
@@ -43,6 +47,7 @@ const App = () => {
                 {user ?
                     <Routes>
                         <Route path="/" element={<BlogList />} />
+                        <Route path="/users/:id" element={<User />} />
                         <Route path="/users" element={<Users />} />
                     </Routes>
                     :
