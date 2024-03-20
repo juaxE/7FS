@@ -17,6 +17,7 @@ import { logIn, tokenLoggedIn, logOut } from './reducers/userReducer'
 import { initializeBlogs, createBlog } from './reducers/blogReducer'
 import { initializeUsers } from './reducers/usersReducer'
 import LoginForm from './components/LoginForm'
+import BlogView from './components/BlogView'
 
 
 
@@ -47,6 +48,7 @@ const App = () => {
                 {user ?
                     <Routes>
                         <Route path="/" element={<BlogList />} />
+                        <Route path="/blogs/:id" element={<BlogView />} />
                         <Route path="/users/:id" element={<User />} />
                         <Route path="/users" element={<Users />} />
                     </Routes>
