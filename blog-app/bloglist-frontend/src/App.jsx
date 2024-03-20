@@ -1,20 +1,16 @@
-import { useState, useEffect, useRef } from 'react'
+import { useEffect } from 'react'
 import {
     BrowserRouter as Router,
     Routes, Route
 } from 'react-router-dom'
-import Blog from './components/Blog'
 import Notification from './components/Notification'
-import Togglable from './components/Togglable'
-import BlogForm from './components/BlogForm'
 import Users from './components/Users'
 import User from './components/User'
 import Menu from './components/Menu'
 import BlogList from './components/BlogList'
 import { useDispatch, useSelector } from 'react-redux'
-import { setNotification } from './reducers/notificationReducer'
-import { logIn, tokenLoggedIn, logOut } from './reducers/userReducer'
-import { initializeBlogs, createBlog } from './reducers/blogReducer'
+import { tokenLoggedIn } from './reducers/userReducer'
+import { initializeBlogs } from './reducers/blogReducer'
 import { initializeUsers } from './reducers/usersReducer'
 import LoginForm from './components/LoginForm'
 import BlogView from './components/BlogView'
