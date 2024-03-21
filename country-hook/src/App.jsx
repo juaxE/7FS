@@ -37,7 +37,6 @@ const useCountry = (name) => {
     fetchCountry()
   }, [name])
 
-  console.log(country)
   return country
 }
 

@@ -3,17 +3,19 @@ import {
     BrowserRouter as Router,
     Routes, Route
 } from 'react-router-dom'
+import { Container } from '@mui/material'
 import Notification from './components/Notification'
 import Users from './components/Users'
 import User from './components/User'
 import Menu from './components/Menu'
 import BlogList from './components/BlogList'
+import LoginForm from './components/LoginForm'
+import BlogView from './components/BlogView'
 import { useDispatch, useSelector } from 'react-redux'
 import { tokenLoggedIn } from './reducers/userReducer'
 import { initializeBlogs } from './reducers/blogReducer'
 import { initializeUsers } from './reducers/usersReducer'
-import LoginForm from './components/LoginForm'
-import BlogView from './components/BlogView'
+
 
 
 
@@ -36,23 +38,24 @@ const App = () => {
     }, [])
 
     return (
-        <div>
-            <h2>Blogs</h2>
-            <Router>
-                {user && <Menu />}
-                <Notification />
-                {user ?
-                    <Routes>
-                        <Route path="/" element={<BlogList />} />
-                        <Route path="/blogs/:id" element={<BlogView />} />
-                        <Route path="/users/:id" element={<User />} />
-                        <Route path="/users" element={<Users />} />
-                    </Routes>
-                    :
-                    <LoginForm />
-                }
-            </Router>
-        </div>
+        <Container>
+            <div>
+                <Router>
+                    {user && <Menu />}
+                    <Notification />
+                    {user ?
+                        <Routes>
+                            <Route path="/" element={<BlogList />} />
+                            <Route path="/blogs/:id" element={<BlogView />} />
+                            <Route path="/users/:id" element={<User />} />
+                            <Route path="/users" element={<Users />} />
+                        </Routes>
+                        :
+                        <LoginForm />
+                    }
+                </Router>
+            </div>
+        </Container>
     )
 }
 export default App

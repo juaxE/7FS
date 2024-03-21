@@ -277,7 +277,6 @@ describe('when there is initially some blogs saved', () => {
 
         test('A Blogs title can be updated', async () => {
             const blogsAtStart = await helper.blogsInDb()
-            console.log("täällä", blogsAtStart)
             const blog = blogsAtStart[0]
             blog.title = 'this title is so creative wow'
             const id = blog.id

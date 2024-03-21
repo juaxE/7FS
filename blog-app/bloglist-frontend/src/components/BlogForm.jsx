@@ -2,6 +2,10 @@ import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { setNotification } from '../reducers/notificationReducer'
 import { createBlog } from '../reducers/blogReducer'
+import {
+    TextField,
+    Button
+} from '@mui/material'
 
 
 const BlogForm = () => {
@@ -31,36 +35,35 @@ const BlogForm = () => {
             <h2>Add new blog</h2>
             <form onSubmit={addBlog}>
                 <div>
-                    <label>Title:</label>
-                    <input
-                        type="text"
+                    <TextField
+                        label='Title'
                         value={title}
                         name="Title"
                         data-testid="title"
                         onChange={({ target }) => setTitle(target.value)}
-                    ></input>
+                    />
                 </div>
                 <div>
-                    <label>Author:</label>
-                    <input
-                        type="text"
+                    <TextField
+                        label='Author'
                         value={author}
                         name="Author"
                         data-testid="author"
                         onChange={({ target }) => setAuthor(target.value)}
-                    ></input>
+                    />
                 </div>
                 <div>
-                    <label>Url:</label>
-                    <input
-                        type="text"
+                    <TextField
+                        label='Url'
                         value={url}
                         name="Url"
                         data-testid="url"
                         onChange={({ target }) => setUrl(target.value)}
-                    ></input>
+                    />
                 </div>
-                <button type="submit">create</button>
+                <div>
+                    <Button variant='contained' color='primary' type="submit">create</Button>
+                </div>
             </form>
         </div>
     )
